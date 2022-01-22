@@ -1,0 +1,22 @@
+<h5 class="text-center my-5" *ngIf="isPageLoaded">you have {{getStudentsCount()}} Students </h5>
+<p class="text-center h3" *ngIf="!isPageLoaded">loading data.......</p>
+<table class="table">
+    <tr>
+        <td>#</td>
+        <td>FullName</td>
+        <td>Age</td>
+        <td>Email</td>
+        <td>Mobile</td>
+
+    </tr>
+    <tr *ngFor="let student of sortByAge(students) ; let currentIndex=index;">
+        <td [class.red-color]="student.Age>=22" [class.color-green]="student.Age<22">{{currentIndex+1}}</td>
+        <td> <a routerLink="/students/studentsdetails/{{student.ID}}" >{{student.Name}}</a></td>
+        <td> <input type="number" [(ngModel)]="student.Age" value="{{student.Age}}"></td>
+        <td>{{student.Email}}</td>
+        <td><input type="number" placeholder="Mobile" value="{{student.Mobile}}"></td>
+        <td><button class="btn btn-outline-danger" type="button" (click)="delete(currentIndex)">Delete</button></td>
+        <td><button class="btn btn-outline-primary"  (click)="update(currentIndex)" type="button">Update</button></td>
+
+
+    </tr>
